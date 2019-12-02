@@ -1,72 +1,9 @@
 import React from "react";
-import { Info, DateTime } from "luxon";
+import { DateTime } from "luxon";
 import { BirthdateFields } from "./styles";
-
-const MonthsSelect = ({ handleChange, state }) => {
-  const months = Info.months();
-  const name = "bday-month";
-  const value = state[name] || "default";
-  return (
-    <select
-      data-testid="bday-month"
-      onChange={handleChange}
-      value={value}
-      name="bday-month"
-    >
-      <option value="default" disabled>
-        Months
-      </option>
-      {months.map((m, i) => {
-        return (
-          <option value={i + 1} key={`month-${m.toLowerCase()}`}>
-            {m}
-          </option>
-        );
-      })}
-    </select>
-  );
-};
-
-const DayInput = ({ handleChange, state, max = 31 }) => {
-  const name = "bday-day";
-  const value = state[name];
-  return (
-    <input
-      data-testid="bday-day"
-      disabled={!state["bday-month"] || state["bday-month"] === ""}
-      name="bday-day"
-      placeholder="Day"
-      type="number"
-      step="1"
-      min="1"
-      max={max}
-      pattern="\d*"
-      onChange={handleChange}
-      defaultValue={value}
-    />
-  );
-};
-
-const YearInput = ({ handleChange, state, min, max }) => {
-  const name = "bday-year";
-  const value = state[name];
-  return (
-    <input
-      data-testid="bday-year"
-      disabled={!state["bday-month"] || state["bday-month"] === ""}
-      onChange={handleChange}
-      name="bday-year"
-      autoComplete="bday-year"
-      placeholder="Year"
-      type="number"
-      step="1"
-      min={min}
-      defaultValue={value}
-      max={max}
-      pattern="\d*"
-    />
-  );
-};
+import MonthsSelect from "./MonthsSelect";
+import DayInput from "./DayInput";
+import YearInput from "./YearInput";
 
 function birthDateReducer(state, action) {
   switch (action.type) {
